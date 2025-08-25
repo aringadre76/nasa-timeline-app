@@ -7,7 +7,7 @@ export interface NASAImage {
     description_508?: string
     date_created?: string
     keywords?: string[]
-    nas-id?: string
+    nas_id?: string
     media_type?: string
     center?: string
     photographer?: string
@@ -15,7 +15,7 @@ export interface NASAImage {
     secondary_creator?: string
     album?: string[]
   }>
-  links?: Array<{
+  links: Array<{
     href: string
     rel: string
     render: string

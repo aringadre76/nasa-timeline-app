@@ -16,7 +16,8 @@ interface TimelineProps {
 export default function Timeline({ images, totalHits, selectedDate, searchQuery }: TimelineProps) {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
 
-  if (images.length === 0) {
+  // Only show content when there are actual images to display
+  if (!images || images.length === 0) {
     return (
       <div className="text-center py-16">
         <div className="w-24 h-24 mx-auto mb-6 text-gray-600">
@@ -25,12 +26,12 @@ export default function Timeline({ images, totalHits, selectedDate, searchQuery 
           </svg>
         </div>
         <h3 className="text-xl font-semibold text-gray-300 mb-2">
-          {searchQuery ? 'No Images Found' : 'No Images Found'}
+          {searchQuery ? 'No Images Found' : 'No Images Available'}
         </h3>
         <p className="text-gray-500">
-          {searchQuery 
+          {searchQuery
             ? `No NASA images were found for "${searchQuery}". Try different keywords or browse by date.`
-            : `No NASA images were found for ${formatDate(selectedDate)}. Try selecting a different date or use the search feature.`
+            : `No NASA images were found for ${formatDate(selectedDate)} or nearby dates. Try selecting a different date or use the search feature.`
           }
         </p>
       </div>
@@ -41,12 +42,15 @@ export default function Timeline({ images, totalHits, selectedDate, searchQuery 
     <div className="space-y-6">
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-white mb-2">
-          {totalHits} Image{totalHits !== 1 ? 's' : ''} Found
+          {searchQuery 
+            ? `${totalHits} Image${totalHits !== 1 ? 's' : ''} Found`
+            : `${totalHits} Image${totalHits !== 1 ? 's' : ''} from ${new Date(selectedDate).getFullYear()}`
+          }
         </h2>
         <p className="text-gray-400">
-          {searchQuery 
+          {searchQuery
             ? `Results for: ${searchQuery}`
-            : `Scroll through the timeline to explore space history from ${formatDate(selectedDate)}`
+            : `Images from ${new Date(selectedDate).getFullYear()} in space history`
           }
         </p>
       </div>

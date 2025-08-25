@@ -13,15 +13,11 @@ export const searchNASAImages = async (params: SearchParams): Promise<NASAImageC
       const month = date.getMonth() + 1
       const day = date.getDate()
       
-      // Search for images within a range around the selected date
-      // This gives us images from the same time period across different years
-      const startYear = Math.max(1958, year - 5) // Go back up to 5 years
-      const endYear = Math.min(new Date().getFullYear(), year + 5) // Go forward up to 5 years
+      // Search for images specifically from the selected year
+      queryParams.append('year_start', year.toString())
+      queryParams.append('year_end', year.toString())
       
-      queryParams.append('year_start', startYear.toString())
-      queryParams.append('year_end', endYear.toString())
-      
-      // Add month-day keywords to get images from around the same date
+      // Add month-day keywords to get images from around the same date within that year
       const monthStr = String(month).padStart(2, '0')
       const dayStr = String(day).padStart(2, '0')
       queryParams.append('keywords', `${monthStr}-${dayStr}`)
@@ -40,14 +36,13 @@ export const searchNASAImages = async (params: SearchParams): Promise<NASAImageC
     const response = await axios.get(`${NASA_API_BASE}/search?${queryParams.toString()}`)
     let items = response.data.collection.items
 
-    // If we still don't have results, try a broader search for the month
+    // If no results for the specific month-day, try searching just for the year
     if (items.length === 0 && params.date) {
-      console.log('No results for date range, trying broader month search...')
+      console.log('No results for specific month-day, trying year-only search...')
       const date = new Date(params.date)
-      const month = date.getMonth() + 1
-      const monthStr = String(month).padStart(2, '0')
+      const year = date.getFullYear()
       
-      const broaderResponse = await axios.get(`${NASA_API_BASE}/search?media_type=image&keywords=${monthStr}`)
+      const broaderResponse = await axios.get(`${NASA_API_BASE}/search?media_type=image&year_start=${year}&year_end=${year}`)
       items = broaderResponse.data.collection.items
     }
 

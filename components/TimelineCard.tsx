@@ -16,7 +16,7 @@ export default function TimelineCard({ image, isExpanded, onToggleExpanded }: Ti
   const [imageLoading, setImageLoading] = useState(true)
 
   const getImageUrl = (image: NASAImage): string => {
-    if (image.links && image.links.length > 0) {
+    if (image.links && Array.isArray(image.links) && image.links.length > 0) {
       const imageLink = image.links.find(link => link.render === 'image')
       if (imageLink) {
         return imageLink.href

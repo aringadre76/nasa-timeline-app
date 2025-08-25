@@ -20,13 +20,14 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="relative min-h-screen">
           <div className="fixed inset-0 z-0">
-            <Galaxy 
+            <Galaxy
               mouseRepulsion={true}
               mouseInteraction={true}
               density={1.5}
-              glowIntensity={0.5}
+              glowIntensity={0.8}
               saturation={0.8}
               hueShift={240}
+              repulsionStrength={5}
             />
           </div>
           <div className="relative z-10">

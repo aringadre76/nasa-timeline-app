@@ -97,11 +97,11 @@ export default function TimelineApp() {
               This Day in Space
             </h1>
             <p className="text-center text-gray-400 mb-6">
-              {searchParams.keywords 
-                ? `Searching for: ${searchParams.keywords}`
-                : `Explore NASA's historical images from ${formatDate(safeSelectedDate)}`
-              }
-            </p>
+                      {searchParams.keywords
+                        ? `Searching for: ${searchParams.keywords}`
+                        : `Explore NASA's historical images from ${new Date(safeSelectedDate).getFullYear()}`
+                      }
+                    </p>
           </ScrollReveal>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">

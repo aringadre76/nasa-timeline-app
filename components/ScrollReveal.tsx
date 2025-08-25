@@ -1,8 +1,21 @@
-import { useEffect, useRef, useMemo } from 'react'
+import { useEffect, useRef, useMemo, ReactNode, RefObject } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
+
+interface ScrollRevealProps {
+  children: ReactNode
+  scrollContainerRef?: RefObject<HTMLElement>
+  enableBlur?: boolean
+  baseOpacity?: number
+  baseRotation?: number
+  blurStrength?: number
+  containerClassName?: string
+  textClassName?: string
+  rotationEnd?: string
+  wordAnimationEnd?: string
+}
 
 const ScrollReveal = ({
   children,
@@ -15,8 +28,8 @@ const ScrollReveal = ({
   textClassName = "",
   rotationEnd = "bottom bottom",
   wordAnimationEnd = "bottom bottom"
-}) => {
-  const containerRef = useRef(null)
+}: ScrollRevealProps) => {
+  const containerRef = useRef<HTMLHeadingElement>(null)
 
   const splitText = useMemo(() => {
     const text = typeof children === 'string' ? children : ''
