@@ -197,7 +197,21 @@ export default function Galaxy({
   const smoothMouseActive = useRef(0.0);
 
   useEffect(() => {
-    if (!ctnDom.current) return;
+    console.log('Galaxy component mounting...', { mouseInteraction, mouseRepulsion, repulsionStrength });
+    
+    // Check WebGL support
+    const canvas = document.createElement('canvas');
+    const webglContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!webglContext) {
+      console.error('WebGL not supported in this browser');
+      return;
+    }
+    console.log('WebGL is supported');
+    
+    if (!ctnDom.current) {
+      console.error('Container DOM element not found');
+      return;
+    }
     const ctn = ctnDom.current;
     const renderer = new Renderer({
       alpha: transparent,

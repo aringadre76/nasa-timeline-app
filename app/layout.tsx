@@ -23,11 +23,15 @@ export default function RootLayout({
             <Galaxy
               mouseRepulsion={true}
               mouseInteraction={true}
-              density={1.5}
-              glowIntensity={0.8}
-              saturation={0.8}
+              density={2.0}
+              glowIntensity={1.0}
+              saturation={1.0}
               hueShift={240}
-              repulsionStrength={5}
+              repulsionStrength={8}
+              twinkleIntensity={0.6}
+              rotationSpeed={0.2}
+              speed={1.5}
+              starSpeed={0.8}
             />
           </div>
           <div className="relative z-10">
