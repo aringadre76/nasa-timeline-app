@@ -1,0 +1,175 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+PRD: This Day in Space Timeline App
+1. Overview
+
+The This Day in Space Timeline App is a web application that showcases historical NASA images tied to specific dates. Users can explore a scrollable, visually rich timeline (similar to Instagram stories or a vertical feed) populated with NASA’s image archive. Each entry includes image metadata (date, mission, description) and optional contextual links (e.g., Wikipedia articles about missions).
+
+The app highlights engineering skills in API integration, time-series visualization, UI/UX design, and external data enrichment.
+
+2. Goals & Success Metrics
+Goals
+
+Provide an interactive way to explore NASA’s historical image archive.
+
+Demonstrate strong software engineering: clean architecture, API integration, responsive UI.
+
+Deliver an engaging user experience that feels modern (timeline/story-like interface).
+
+Success Metrics
+
+✅ Smooth infinite scrolling timeline with fast image loads.
+
+✅ Users can search by date or browse “random day in history.”
+
+✅ Metadata displayed clearly (mission name, photographer, date, description).
+
+✅ (Stretch) Contextual Wikipedia links enrich each entry.
+
+✅ (Stretch) Shareable links (e.g., “Check out what happened on Aug 24 in space history”).
+
+3. Target Users
+
+Space enthusiasts looking for a fun, educational browsing experience.
+
+General audience curious about historical events tied to specific dates.
+
+Recruiters/portfolio reviewers (showcasing SWE skills).
+
+4. Core Features
+MVP
+
+Date Picker
+
+Users select a specific date (e.g., August 24).
+
+App fetches images released on that date (any year).
+
+Scrollable Timeline
+
+Vertical, card-style timeline (similar to Instagram stories/Twitter feed).
+
+Each card includes:
+
+NASA image
+
+Title & description
+
+Date taken/released
+
+Mission tag (if available)
+
+NASA API Integration
+
+Use images.nasa.gov API
+.
+
+Query by date & keywords.
+
+Responsive UI
+
+Works on desktop and mobile.
+
+Clean, minimal styling (dark mode default).
+
+Stretch Features
+
+Wikipedia API Integration
+
+For each mission tag, auto-fetch related Wikipedia summary.
+
+Display as expandable context below image card.
+
+Random Day Button
+
+Show events for a random date.
+
+User Sharing
+
+Generate shareable link: thisdayinspace.app/08-24.
+
+Favorites
+
+Authenticated users can save favorite images.
+
+Animations/Transitions
+
+Smooth fade/slide when switching dates.
+
+5. Technical Requirements
+Frontend
+
+Framework: React (Next.js recommended for SEO + SSR).
+
+Styling: TailwindCSS for responsive design.
+
+Visualization: Timeline layout with scrollable cards.
+
+State Mgmt: React Query / Redux for caching NASA API calls.
+
+Backend (Optional for MVP)
+
+Not strictly required (API is public).
+
+Backend could be added for:
+
+Caching results (Redis/Postgres).
+
+User auth & favorites.
+
+APIs
+
+NASA Image Library API (core).
+
+Wikipedia API (stretch).
+
+Hosting
+
+Frontend: Vercel or Netlify.
+
+Backend (if needed): Render/Heroku.
+
+6. User Flows
+
+Flow 1: Explore a Date
+
+User opens app → sees default today’s date.
+
+Timeline shows NASA images taken/released on this day in past years.
+
+User scrolls → images load with metadata.
+
+Flow 2: Change Date
+
+User opens date picker.
+
+Selects a new date.
+
+Timeline reloads with images for that date.
+
+Flow 3: Enrich Context (Stretch)
+
+User clicks “See Mission Context.”
+
+Wikipedia summary expands inline under image card.
+
+7. Non-Functional Requirements
+
+Performance: Images lazy-loaded (avoid long waits).
+
+Accessibility: High-contrast mode, keyboard navigable.
+
+Scalability: Should handle ~10k daily users without backend caching.
+
+SEO: Each date page should be shareable & crawlable.
+
+8. Future Extensions
+
+Mobile app (React Native) with push notifications: “Today in Space History.”
+
+Gamification: Quiz mode (“Which mission is this from?”).
+
+AI summaries of daily events.
